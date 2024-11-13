@@ -18,7 +18,7 @@ const UserDetails = () => {
             </p>
             <Button
                 variant="ghost"
-                className="w-full justify-start text-red-600"
+                className="w-full justify-start text-red-600 pt-10"
                 onClick={() => signOut()}
             >
                 <LogOut className="w-4 h-4 mr-2" />
