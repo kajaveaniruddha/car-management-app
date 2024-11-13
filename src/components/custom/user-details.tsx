@@ -16,9 +16,10 @@ const UserDetails = () => {
             <p className="text-gray-700">
                 <strong>Email:</strong> {session?.user.email}
             </p>
+            <br className=" pt-10" />
             <Button
                 variant="ghost"
-                className="w-full justify-start text-red-600 pt-10"
+                className="w-full justify-start text-red-600"
                 onClick={() => signOut()}
             >
                 <LogOut className="w-4 h-4 mr-2" />
