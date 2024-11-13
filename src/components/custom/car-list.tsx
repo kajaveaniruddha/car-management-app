@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/card";
 import { Loader2 } from "lucide-react";
 import { ICars } from "@/models/Car";
+import Image from "next/image";
 
 const CarList = () => {
   const { toast } = useToast();
@@ -58,9 +59,6 @@ const CarList = () => {
     fetchCars();
   }, []);
 
-  const handleRefresh = () => {
-    fetchCars();
-  };
 
   const handlePrevImage = (carId: string) => {
     setCurrentImageIndices((prev) => ({
@@ -121,7 +119,7 @@ const CarList = () => {
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold">Your Cars</h2>
         <button
-          onClick={handleRefresh}
+          onClick={fetchCars}
           className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
         >
           Refresh
@@ -135,46 +133,46 @@ const CarList = () => {
             const carId = car._id as string;
             const currentIndex = currentImageIndices[carId] || 0;
             const totalImages = car.images ? car.images.length : 0;
-
             return (
               <Card key={carId}>
-                {car.images && car.images.length > 0 && (
-                  <div className="relative">
-                    <img
-                      src={car.images[currentIndex]}
-                      alt={car.title}
-                      className="w-full h-48 object-cover rounded-t-lg"
-                    />
-                    {totalImages > 1 && (
-                      <>
-                        <button
-                          onClick={() => handlePrevImage(carId)}
-                          className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-1 rounded-full hover:bg-opacity-75"
-                        >
-                          &#10094;
-                        </button>
-                        <button
-                          onClick={() => handleNextImage(carId, totalImages)}
-                          className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-1 rounded-full hover:bg-opacity-75"
-                        >
-                          &#10095;
-                        </button>
-                      </>
-                    )}
-                    <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
-                      {currentIndex + 1} / {totalImages}
-                    </div>
+                <div className="relative">
+                  <Image
+                    width={100}
+                    height={100}
+                    src={car.images && totalImages ? car.images[currentIndex] : "/temp.jpg"}
+                    alt={car.title}
+                    className="w-full h-48 object-cover rounded-t-lg"
+                  />
+                  {car.images && totalImages > 1 && (
+                    <>
+                      <button
+                        onClick={() => handlePrevImage(carId)}
+                        className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-1 rounded-full hover:bg-opacity-75"
+                      >
+                        &#10094;
+                      </button>
+                      <button
+                        onClick={() => handleNextImage(carId, totalImages)}
+                        className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-1 rounded-full hover:bg-opacity-75"
+                      >
+                        &#10095;
+                      </button>
+                    </>
+                  )}
+                  <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
+                    {totalImages > 0 ? currentIndex + 1 : 0} / {totalImages}
                   </div>
-                )}
+                </div>
+
                 <CardHeader>
                   <CardTitle>{car.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-700">{car.description}</p>
                   <div className="mt-2">
-                    {car.tags.map((tag,index) => (
+                    {car.tags.map((tag, index) => (
                       <span
-                        key={tag+index}
+                        key={tag + index}
                         className="inline-block bg-gray-200 text-gray-800 px-2 py-1 mr-2 rounded-full text-xs"
                       >
                         {tag}

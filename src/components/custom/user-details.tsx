@@ -1,6 +1,8 @@
 "use client";
 
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import { Button } from "../ui/button";
+import { LogOut } from "lucide-react";
 
 const UserDetails = () => {
     const { data: session } = useSession()
@@ -14,6 +16,14 @@ const UserDetails = () => {
             <p className="text-gray-700">
                 <strong>Email:</strong> {session?.user.email}
             </p>
+            <Button
+                variant="ghost"
+                className="w-full justify-start text-red-600"
+                onClick={() => signOut()}
+            >
+                <LogOut className="w-4 h-4 mr-2" />
+                Log out
+            </Button>
         </div>
     );
 };

@@ -22,7 +22,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 // Define the sign-in schema using Zod
 const signInSchema = z.object({
@@ -167,7 +167,7 @@ const SigninPage = () => {
         </form>
       </Form>
       <div className="text-center mt-6 text-sm">
-        Don't have an account?{" "}
+        Don&apos;t have an account?{" "}
         <Link href="/signup" className="text-blue-600 hover:underline">
           Sign Up
         </Link>

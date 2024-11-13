@@ -15,18 +15,18 @@ const deleteCarSchema = z.object({
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ): Promise<NextResponse> {
-  const { id } = params;
+  const { id } = await params;
 
   // Validate the ID
-//   const parseResult = deleteCarSchema.safeParse({ id });
-//   if (!parseResult.success) {
-//     return NextResponse.json(
-//       { success: false, message: "Invalid car ID." },
-//       { status: 400 }
-//     );
-//   }
+  //   const parseResult = deleteCarSchema.safeParse({ id });
+  //   if (!parseResult.success) {
+  //     return NextResponse.json(
+  //       { success: false, message: "Invalid car ID." },
+  //       { status: 400 }
+  //     );
+  //   }
 
   // Authenticate the user
   const session = await getServerSession(authOptions);

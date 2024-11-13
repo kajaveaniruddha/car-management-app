@@ -1,5 +1,3 @@
-// app/api/cars/route.ts
-
 import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/lib/dbConnect";
 import CarModel from "@/models/Car";
@@ -69,7 +67,7 @@ export async function POST(request: NextRequest) {
       { success: true, message: "Car added successfully.", car: newCar },
       { status: 201 }
     );
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error adding car:", error);
 
     if (error instanceof z.ZodError) {

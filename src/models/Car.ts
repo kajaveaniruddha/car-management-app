@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 export interface ICars extends Document {
-  userId: string | undefined;
+  userId: mongoose.Schema.Types.ObjectId | undefined;
   title: string;
   description: string;
   tags: string[];

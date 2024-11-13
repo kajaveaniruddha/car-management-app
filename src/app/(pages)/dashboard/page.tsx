@@ -1,13 +1,12 @@
 "use client"
 import { useState } from 'react'
-import { Menu, X, Plus, Car } from 'lucide-react'
+import { Menu, Plus, Car } from 'lucide-react'
 import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent } from "@/components/ui/sheet"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import UserDetails from "@/components/custom/user-details"
 import AddCar from "@/components/custom/add-car"
 import CarList from "@/components/custom/car-list"
-import { DialogTitle } from "@/components/ui/dialog";
 
 export default function CarsPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
