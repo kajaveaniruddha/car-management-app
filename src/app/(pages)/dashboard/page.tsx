@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import UserDetails from "@/components/custom/user-details"
 import AddCar from "@/components/custom/add-car"
 import CarList from "@/components/custom/car-list"
+import { DialogTitle } from "@/components/ui/dialog";
 
 export default function CarsPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
