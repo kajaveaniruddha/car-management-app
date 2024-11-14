@@ -15,30 +15,6 @@ const addCarSchema = z.object({
     .optional(),
 });
 
-export async function GET(request: NextRequest) {
-  const session = await getServerSession(authOptions);
-
-  if (!session || !session.user) {
-    return NextResponse.json(
-      { success: false, message: "Not Authenticated." },
-      { status: 401 }
-    );
-  }
-
-  await dbConnect();
-
-  try {
-    const cars = await CarModel.find({ userId: session.user._id });
-    return NextResponse.json({ success: true, cars }, { status: 200 });
-  } catch (error) {
-    console.error("Error fetching cars:", error);
-    return NextResponse.json(
-      { success: false, message: "Failed to fetch cars." },
-      { status: 500 }
-    );
-  }
-}
-
 export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);
 
@@ -86,3 +62,45 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+/**
+ * @swagger
+ * /api/add-car:
+ *   post:
+ *     summary: Add a new car
+ *     description: Adds a new car to the authenticated user's collection.
+ *     security:
+ *       - BearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 description: Title of the car
+ *               description:
+ *                 type: string
+ *                 description: Description of the car
+ *               tags:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 description: Tags associated with the car
+ *               images:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 description: Image URLs of the car (max 10 images)
+ *     responses:
+ *       201:
+ *         description: Car added successfully
+ *       400:
+ *         description: Validation error
+ *       401:
+ *         description: Not authenticated
+ *       500:
+ *         description: Unexpected error
+ */

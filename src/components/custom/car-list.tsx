@@ -26,7 +26,7 @@ const CarList = () => {
   const fetchCars = async () => {
     setLoading(true);
     try {
-      const response = await axios.get<ApiResponse>("/api/get-cars");
+      const response = await axios.get<ApiResponse>("/api/list-cars");
       if (response.data.success) {
         setCars(response.data.cars || []);
         // Initialize image indices for each car

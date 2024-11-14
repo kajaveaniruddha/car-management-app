@@ -8,27 +8,12 @@ import CarModel from "@/models/Car";
 import { z } from "zod";
 import { authOptions } from "../../auth/[...nextauth]/options";
 
-// Define schema for validating the car ID
-const deleteCarSchema = z.object({
-  id: z.string().uuid(),
-});
-
 export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ): Promise<NextResponse> {
   const { id } = await params;
 
-  // Validate the ID
-  //   const parseResult = deleteCarSchema.safeParse({ id });
-  //   if (!parseResult.success) {
-  //     return NextResponse.json(
-  //       { success: false, message: "Invalid car ID." },
-  //       { status: 400 }
-  //     );
-  //   }
-
-  // Authenticate the user
   const session = await getServerSession(authOptions);
 
   if (!session || !session.user || !session.user._id) {
@@ -93,3 +78,32 @@ export async function DELETE(
     );
   }
 }
+
+
+/**
+ * @swagger
+ * /api/delete-car/{id}:
+ *   delete:
+ *     summary: Delete a car by ID
+ *     description: Deletes a specific car by ID if the authenticated user is authorized.
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: The ID of the car to delete
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Car deleted successfully
+ *       401:
+ *         description: Not authenticated
+ *       403:
+ *         description: Unauthorized
+ *       404:
+ *         description: Car not found
+ *       500:
+ *         description: Unexpected error
+ */
