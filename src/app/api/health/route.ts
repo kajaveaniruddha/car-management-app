@@ -1,3 +1,5 @@
+import { NextRequest, NextResponse } from "next/server";
+
 /**
  * @swagger
  * /api/health:
@@ -9,9 +11,17 @@
  *       400:
  *         description: Unhealthy!
  */
-export async function GET(_request: Request) {
-    // Do whatever you want
-    return new Response('Healthy!', {
-      status: 200,
-    });
+export async function GET(request: NextRequest) {
+  try {
+    return NextResponse.json(
+      { success: true, message: "healthy" },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Server unhealthy", error);
+    return NextResponse.json(
+      { success: false, message: "unhealthy" },
+      { status: 500 }
+    );
   }
+}
