@@ -3,7 +3,7 @@
 This project is a **Car Management Application** that allows users to **create, view, edit, and delete cars**. Each car can contain up to **10 images**, a **title**, a **description**, and **tags** (e.g., car type, company, dealer). The application includes **user authentication** and restricts each user to managing only their own cars. Additionally, users can search through their cars.
 
 ### [Live Demo](https://car-management-app-mu.vercel.app/)
-### [SWAGGER API DOCS](https://car-management-app-mu.vercel.app/api/api-doc)
+### [SWAGGER API DOCS](https://car-management-app-mu.vercel.app/api-doc)
    - Get the cookies from network tab after login and use it as a bearer token directly.
 ## Features
 
